@@ -50,4 +50,34 @@ def WorldOp : Hello_Op<"world", [Pure]> {
     }];
 }
 
+def TestOp : Hello_Op<"test", [Pure]> {
+    let summary = "print Testing,Testng!";
+    let description = [{
+        The "world" operation prints "Testing,Testng", and produces
+        no results.
+    }];
+}
+
+def AddOp : Hello_Op<"add", [Pure]> {
+    let summary = "add two integers";
+    let description = [{
+        Adds two integer values and returns their sum.
+
+        Example:
+        ```mlir
+        %result = hello.add %a, %b : i32
+        ```
+    }];
+
+    // Define the operands
+    let arguments = (ins I32:$lhs, I32:$rhs);
+    
+    // Define the results
+    let results = (outs I32:$result);
+    
+    // Assembly format
+    let assemblyFormat = "$lhs `,` $rhs attr-dict `:` type($result)";
+}
+
+
 #endif // HELLO_OPS

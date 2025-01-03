@@ -17,6 +17,11 @@ project(mlir-hello LANGUAGES CXX C)
 
 set(CMAKE_CXX_STANDARD 17 CACHE STRING "C++ standard to conform to")
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DLLVM_ENABLE_LLD=ON")
+
+set(LLVM_DIR /usr/lib/llvm-18/lib/cmake/llvm/)
+find_package(LLVM REQUIRED CONFIG)
+set(MLIR_DIR /usr/lib/llvm-18/lib/cmake/mlir/)
 find_package(MLIR REQUIRED CONFIG)
 
 message(STATUS "Using MLIRConfig.cmake in: ${MLIR_DIR}")
@@ -43,4 +48,5 @@ add_definitions(${LLVM_DEFINITIONS})
 add_subdirectory(include)
 add_subdirectory(lib)
 add_subdirectory(test)
+add_subdirectory(test-opt)
 add_subdirectory(hello-opt)

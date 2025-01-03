@@ -170,6 +170,8 @@ void HelloToAffineLowerPass::runOnOperation() {
     });
   });
   target.addLegalOp<hello::WorldOp>();
+  target.addLegalOp<hello::TestOp>();
+  target.addLegalOp<hello::AddOp>();
 
   mlir::RewritePatternSet patterns(&getContext());
   patterns.add<ConstantOpLowering, PrintOpLowering>(&getContext());
